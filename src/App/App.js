@@ -10,7 +10,7 @@ export default function App() {
     <HashRouter>
       <React.Fragment>
         <div className="todoapp">
-          <Route path="/:filter?" component={TodoList} />
+          <TodoList />
         </div>
         <Footer />
       </React.Fragment>

@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://jacob-ebey.github.io/hooks-todo",
   "dependencies": {
+    "axios": "^0.19.2",
     "core-js": "^2.5.7",
     "raf": "^3.4.1",
     "react": "^16.8.1",
