@@ -1,7 +1,6 @@
 import React from "react";
-import { HashRouter, Route } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import "todomvc-app-css/index.css";
-
 import Footer from "../components/Footer";
 import TodoList from "../containers/TodoList";
 
