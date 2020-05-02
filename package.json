@@ -2,7 +2,6 @@
   "name": "hooks-todo",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://jacob-ebey.github.io/hooks-todo",
   "dependencies": {
     "axios": "^0.19.2",
     "core-js": "^2.5.7",
@@ -27,8 +26,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --coverage",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "predeploy": "npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"
