@@ -14,6 +14,19 @@ export default function TodoItem({ todo, todos, setTodos }) {
     setLabel(e.target.value)
   }
 
+  const handleSetIsDone = async () => {
+    setIsDone(!isDone)
+    await axios.post(`http://localhost:3001/update`, {
+        id: todo.id,
+        done: !isDone,
+        label: label
+      })  
+    .then(res => {
+      console.log(res.data)
+    })
+    .catch(err => console.log(err))
+  }
+
   const ref = useRef();
   const wrapperRef = useRef()
   useOnClickOutside(wrapperRef, () => {
@@ -52,12 +65,14 @@ export default function TodoItem({ todo, todos, setTodos }) {
     <li
     ref={wrapperRef}  
     onClick={handleViewClick}
-      className={`${editing ? "editing" : ""} ${todo.done ? "completed" : ""}`}
+    className={`${editing ? "editing" : ""} ${isDone ? "completed" : ""}`}
     >
       <div className="view">
         <input
           type="checkbox"
+          checked={isDone ? true : false}
           className="toggle"
+          onClick={handleSetIsDone}
         />
         <label>{label}</label>
         <button 
