@@ -8,6 +8,7 @@ import axios from 'axios'
 export default function TodoItem({ todo, todos, setTodos }) {
   const [editing, setEditing] = useState(false)
   const [label, setLabel] = useState(todo.label)
+  const [isDone, setIsDone] = useState(todo.done)
 
   const handleSetLabel = (e) => {
     setLabel(e.target.value)
