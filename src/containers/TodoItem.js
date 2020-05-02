@@ -12,7 +12,7 @@ export default function TodoItem({ todo }) {
 
   const onDelete = async () => { 
     const todoId = todo.id
-    await axios.delete(`http://localhost:3001/delete/${todoId}`)  
+    await axios.delete(`https://delight-backend.herokuapp.com/delete/${todoId}`)  
     .then(res => {
       console.log(res)
       return res.data
