@@ -21,9 +21,7 @@ export default function TodoItem({ todo, todos, setTodos }) {
         done: !isDone,
         label: label
       })  
-    .then(res => {
-      console.log(res.data)
-    })
+    .then(res => console.log(res.data))
     .catch(err => console.log(err))
   }
 
