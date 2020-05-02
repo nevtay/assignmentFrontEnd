@@ -1,35 +1,70 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useState, useRef, useCallback } from "react";
+import useOnClickOutside from "use-onclickoutside";
+
+import useDoubleClick from "../hooks/useDoubleClick";
+import useOnEnter from "../hooks/useOnEnter";
+
 import axios from 'axios'
 
-
-
 export default function TodoItem({ todo }) {
-  // const onDelete = await
+  const [editing, setEditing] = useState(false)
+  const [label, setLabel] = useState(todo.label)
+
+  const onDelete = async () => { 
+    const todoId = todo.id
+    await axios.delete(`http://localhost:3001/delete/${todoId}`)  
+    .then(res => {
+      console.log(res)
+      return res.data
+    })
+    .catch(err => console.log(err))
+  }
+
+  const handleViewClick = useDoubleClick(null, () => setEditing(true));
+
+  const finishedCallback = useCallback(
+    () => {
+      setEditing(false);
+      setLabel(label);
+    },
+    [todo]
+  );
+
+  const onChange = useCallback(event => setLabel(event.target.value), [
+    todo.id
+  ]);
+
+  const onEnter = useOnEnter(finishedCallback, [todo]);
+
+  const ref = useRef();
+  useOnClickOutside(ref, finishedCallback);
+
   return (
-    <li>
+    <li
+      onClick={handleViewClick}
+      className={`${editing ? "editing" : ""} ${todo.done ? "completed" : ""}`}
+    >
       <div className="view">
         <input
           type="checkbox"
           className="toggle"
-          // checked={todo.done}
-          // onChange={onDone}
-          // autoFocus={true}
         />
-        <label>{todo.label}</label>
+        <label>{label}</label>
         <button 
         className="destroy" 
-        // onClick={onDelete} 
+        onClick={onDelete} 
         />
       </div>
-      {/* {editing && (
+      {editing && (
         <input
           ref={ref}
+          type="text"
           className="edit"
-          value={todo.label}
+          value={label}
           onChange={onChange}
           onKeyPress={onEnter}
         />
-      )} */}
+      )}
     </li>
   );
 }
