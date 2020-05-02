@@ -14,7 +14,7 @@ export default function TodoItem({ todo, todos, setTodos }) {
     setLabel(e.target.value)
   }
 
-  const handleSetIsDone = async () => {
+  const handleSetIsDone = async (e) => {
     setIsDone(!isDone)
     await axios.post(`http://localhost:3001/update`, {
         id: todo.id,
@@ -43,9 +43,7 @@ export default function TodoItem({ todo, todos, setTodos }) {
         id: todo.id,
         label: label
       })  
-    .then(res => {
-       console.log(res.data)
-    })
+    .then(res => console.log(res.data))
     .catch(err => console.log(err))
     }
   }
@@ -70,9 +68,9 @@ export default function TodoItem({ todo, todos, setTodos }) {
       <div className="view">
         <input
           type="checkbox"
-          checked={isDone ? true : false}
           className="toggle"
-          onClick={handleSetIsDone}
+          defaultChecked={isDone}
+          onClick={(e) => handleSetIsDone(e)}
         />
         <label>{label}</label>
         <button 
