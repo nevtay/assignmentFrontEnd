@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios'
 import TodoItem from "./TodoItem";
+import { guid } from '../utils'
 
 export default function TodoList() {
   const [todos, setTodos] = useState([])
-  const [newValue, setNewValue] = useState('')
+  const [todoInput, setTodoInput] = useState("")
+
+  const handleTodoInput = (e) => {
+    setTodoInput(e.target.value)
+  }
 
   useEffect(() => {
     const getTodos = async() => { 
@@ -18,6 +23,23 @@ export default function TodoList() {
     getTodos()
   }, [])
 
+  const submitTodo = (e) => {
+    const newTodo = {
+      id: guid(),
+      done: false,
+      label: todoInput,
+    }
+    if (e.key === 'Enter') {
+    axios.post('https://delight-backend.herokuapp.com/create', newTodo)
+    .then(res => {
+      console.log(res)
+      setTodos([...todos, newTodo])
+      setTodoInput("")
+    })
+    .catch(err => console.log(err))
+    }
+  }
+
   return (
     <React.Fragment>
       <header className="header">
@@ -26,10 +48,10 @@ export default function TodoList() {
           className="new-todo"
           placeholder="What needs to be done?"
           type="text"
-          onKeyPress={setNewValue}
-          value={newValue}
-          onChange={setNewValue}
-        />
+          onKeyDown={submitTodo}
+          value={todoInput}
+          onChange={handleTodoInput}
+          />
       </header>
 
       <section className="main">
@@ -42,13 +64,14 @@ export default function TodoList() {
         <ul className="todo-list">
           {todos.map(todo => (
             <TodoItem key={todo.id} todo={todo} />
-          ))}
+          ))
+          }
         </ul>
       </section>
 
       <footer className="footer">
         <span className="todo-count">
-          {/* <strong>{left}</strong> items left */}
+          <strong>{todos.length}</strong> items total
         </span>
         <ul className="filters">
           <li>
