@@ -16,7 +16,7 @@ export default function TodoItem({ todo, todos, setTodos }) {
 
   const handleSetIsDone = async (e) => {
     setIsDone(!isDone)
-    await axios.post(`http://localhost:3001/update`, {
+    await axios.post(`https://delight-backend.herokuapp.com/update`, {
         id: todo.id,
         done: !isDone,
         label: label
