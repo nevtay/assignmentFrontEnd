@@ -73,28 +73,6 @@ export default function TodoList() {
         <span className="todo-count">
           <strong>{todos.length}</strong> items total
         </span>
-        <ul className="filters">
-          <li>
-            {/* <NavLink exact={true} to="/" activeClassName="selected"> */}
-              All
-            {/* </NavLink> */}
-          </li>
-          <li>
-            {/* <NavLink to="/active" activeClassName="selected"> */}
-              Active
-            {/* </NavLink> */}
-          </li>
-          <li>
-            {/* <NavLink to="/completed" activeClassName="selected"> */}
-              Completed
-            {/* </NavLink> */}
-          </li>
-        </ul>
-        {/* {anyDone && (
-          <button className="clear-completed" onClick={onClearCompleted}>
-            Clear completed
-          </button>
-        )} */}
       </footer>
     </React.Fragment>
   );
