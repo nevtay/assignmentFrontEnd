@@ -63,7 +63,7 @@ export default function TodoList() {
         <label htmlFor="toggle-all" />
         <ul className="todo-list">
           {todos.map(todo => (
-            <TodoItem key={todo.id} todo={todo} />
+            <TodoItem key={todo.id} todo={todo} todos={todos} setTodos={setTodos} />
           ))
           }
         </ul>
