@@ -6,15 +6,17 @@ import './TodoList.css'
 import loadingSpinner from '../assets/spinner.gif'
 
 export default function TodoList () {
-  const [todos, setTodos] = useState([])
-  const [todoInput, setTodoInput] = useState('')
+  const [displayedTodos, setDisplayedTodos] = useState([])
+  const [newTodoText, setNewTodoText] = useState('')
   const [isLoadingAllTodos, setIsLoadingAllTodos] = useState(true)
   const [isAddingNewTodo, setIsAddingNewTodo] = useState(false)
 
+  // sets newTodoInput
   const handleTodoInput = (e) => {
-    setTodoInput(e.target.value)
+    setNewTodoText(e.target.value)
   }
 
+  // automatically fetches all todos from database whenever page renders
   useEffect(() => {
     const getTodos = async () => {
       setIsLoadingAllTodos(true)
@@ -22,26 +24,30 @@ export default function TodoList () {
         .then(res => {
           console.log(res.data)
           setIsLoadingAllTodos(false)
-          setTodos(res.data)
+          setDisplayedTodos(res.data)
         })
         .catch(err => console.log(err))
     }
     getTodos()
   }, [])
 
+  // creates a new object to be handled by Express middleware
   const submitTodo = (e) => {
     const newTodo = {
       id: guid(),
       done: false,
-      label: todoInput
+      label: newTodoText
     }
+    // if enter key is pressed:
+      // 1. displays loading spinner and sends POST request
+      // 2. pushes the new todo object to setTodos array
     if (e.key === 'Enter') {
       setIsAddingNewTodo(true)
       axios.post('https://delight-backend.herokuapp.com/create', newTodo)
         .then(res => {
           setIsAddingNewTodo(false)
-          setTodos([...todos, newTodo])
-          setTodoInput('')
+          setDisplayedTodos([...displayedTodos, newTodo])
+          setNewTodoText('')
         })
         .catch(err => {
           setIsAddingNewTodo(false)
@@ -60,7 +66,7 @@ export default function TodoList () {
             placeholder="What needs to be done?"
             type="text"
             onKeyDown={submitTodo}
-            value={todoInput}
+            value={newTodoText}
             onChange={handleTodoInput}
           />
         </header>
@@ -76,8 +82,8 @@ export default function TodoList () {
               ? <img src={loadingSpinner} alt="loading" className="loadingSpinnerAllTodos" />
               : ''}
 
-            {todos.map(todo => (
-              <TodoItem key={todo.id} todo={todo} todos={todos} setTodos={setTodos} />
+            {displayedTodos.map(todo => (
+              <TodoItem key={todo.id} todo={todo} todos={displayedTodos} setTodos={setDisplayedTodos} />
             ))
             }
           </ul>
@@ -85,7 +91,7 @@ export default function TodoList () {
 
         <footer className="footer">
           <span className="todo-count">
-            <strong>{todos.length}</strong> items total
+            <strong>{displayedTodos.length} {displayedTodos.length === 1 ? "item" : "items"} total</strong>
           </span>
         </footer>
       </React.Fragment>
