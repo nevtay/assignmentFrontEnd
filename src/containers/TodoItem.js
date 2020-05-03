@@ -29,6 +29,7 @@ export default function TodoItem({ todo, todos, setTodos }) {
   const wrapperRef = useRef()
   useOnClickOutside(wrapperRef, () => {
     if (editing) {
+      setLabel(todo.label)
       setEditing(false)
     }
   })
