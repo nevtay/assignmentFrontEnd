@@ -1,10 +1,10 @@
-import { useCallback } from "react";
+import { useCallback } from 'react'
 
-export default function useOnEnter(callback, inputs) {
+export default function useOnEnter (callback, inputs) {
   return useCallback(event => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      callback(event);
+    if (event.key === 'Enter') {
+      event.preventDefault()
+      callback(event)
     }
-  }, inputs);
+  }, inputs)
 }

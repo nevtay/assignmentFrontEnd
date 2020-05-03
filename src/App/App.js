@@ -1,15 +1,15 @@
-import React from "react";
-import "todomvc-app-css/index.css";
-import Footer from "../components/Footer";
-import TodoList from "../containers/TodoList";
+import React from 'react'
+import 'todomvc-app-css/index.css'
+import Footer from '../components/Footer'
+import TodoList from '../containers/TodoList'
 
-export default function App() {
+export default function App () {
   return (
-  <>
-    <div className="todoapp">
-      <TodoList />
-    </div>
-    <Footer />
-  </>
-  );
+    <>
+      <div className="todoapp">
+        <TodoList />
+      </div>
+      <Footer />
+    </>
+  )
 }

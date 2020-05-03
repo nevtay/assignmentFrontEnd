@@ -1,12 +1,12 @@
-import { globalReducer } from "react-hook-utils";
+import { globalReducer } from 'react-hook-utils'
 
-import { guid } from "../utils";
+import { guid } from '../utils'
 
 export const newTodo = label => ({
   done: false,
   id: guid(),
-  label: (label || "").trim()
-});
+  label: (label || '').trim()
+})
 
 export const reducer = {
   // Delete a todo by id
@@ -20,9 +20,9 @@ export const reducer = {
     state.map(i =>
       i.id === id
         ? {
-            ...i,
-            done
-          }
+          ...i,
+          done
+        }
         : i
     ),
 
@@ -31,9 +31,9 @@ export const reducer = {
     state.map(i =>
       i.id === id
         ? {
-            ...i,
-            label
-          }
+          ...i,
+          label
+        }
         : i
     ),
 
@@ -42,17 +42,17 @@ export const reducer = {
     state.map(i =>
       i.id === id
         ? {
-            ...i,
-            done: !i.done
-          }
+          ...i,
+          done: !i.done
+        }
         : i
     )
-};
+}
 
 export default globalReducer(
   // Load todos from local storage
-  JSON.parse(localStorage.getItem("todos") || "[]"),
+  JSON.parse(localStorage.getItem('todos') || '[]'),
   reducer,
   // On state change, persist to local storage
-  todos => localStorage.setItem("todos", JSON.stringify(todos))
-);
+  todos => localStorage.setItem('todos', JSON.stringify(todos))
+)
