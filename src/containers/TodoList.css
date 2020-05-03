@@ -1,0 +1,13 @@
+.loadingSpinnerAllTodos {
+    margin: auto;
+    display: flex;
+    max-height: 100px;
+    max-width: 100px;
+}
+
+.loadingSpinnerAddTodo {
+    background-image: url('../assets/spinner.gif');
+    background-repeat: no-repeat;
+    background-position: 95% 50%;
+    background-size: 40px 40px;
+}
