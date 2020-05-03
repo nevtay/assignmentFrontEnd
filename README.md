@@ -1,9 +1,12 @@
 # DL Mini Assignment
-A todo list made in React and modified to work with Node + Express instead of local storage.
+A modified todo list forked from [https://github.com/tastejs/todomvc](https://github.com/tastejs/todomvc). This version was adapted from the React Hooks folder of the forked repository.
 
-Visit the site: [https://todomvc-assignment-nevin.netlify.app/](https://todomvc-assignment-nevin.netlify.app/)
+Site: [https://todomvc-assignment-nevin.netlify.app/](https://todomvc-assignment-nevin.netlify.app/)
 
-# How to use
+Backend: [https://github.com/nevtay/assignmentBackEnd](https://github.com/nevtay/assignmentBackEnd)
+
+-----
+## How to use
 
 ### Opening the app / Getting Todos
 1. Open the link
@@ -22,6 +25,9 @@ Visit the site: [https://todomvc-assignment-nevin.netlify.app/](https://todomvc-
 2. Click/tap the todo text to start making changes
     - To **save** edits, press enter
     - To **undo** edits, click or tap outside of the todo
+3. Click the round checkbox to the left of the todo to toggle "done" state
+
+-----
 
 ## Available Scripts
 
